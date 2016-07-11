@@ -1,7 +1,19 @@
-.play_option {
+.play_options {
     border: 2px solid black;
     display: inline-block;
+    text-align: center;
+    padding :20px;
 }
 .log {
     border: 2px solid black;
+    max-height: 200px;
+    overflow: scroll;
+}
+
+.gold{
+  color: green;
+}
+
+.lose{
+  color: red;
 }

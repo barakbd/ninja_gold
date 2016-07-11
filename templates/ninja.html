@@ -2,37 +2,80 @@
 <html>
 
 <head>
-    <link rel='stylesheet' type='text/css' href={{ url_for('static', filename='../static/css/ninja.css' )}} </head>
+    <link rel='stylesheet' type='text/css' href={{ url_for( 'static', filename='../static/css/ninja.css' )}} </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 
     <body>
         <div class='container'>
             <p>
-                Your Gold: {{session['gold_count']}}
+                Your Gold: {{session['gold_total']}}
             </p>
             <main>
 
                 <div id='farm' class='play_options'>
+                    <h2>Farm</h2>
                     <p>
-                        (eacrns 10-20 golds)
+                        (earns 10-20 golds)
                     </p>
                     <form class='play_option' action='process_money' method='post'>
-                        <input type='hidden' name='farm' value='farm' />
-                        <input type='submit' value='submit' />
+                        <input type='hidden' name='building' value='farm' />
+                        <input id='farm_button' type='submit' value='Earn Gold' onclick=getTime()/>
                     </form>
                 </div>
                 <!-- End Farm div -->
-            </main>
 
+                <div id='farm' class='play_options'>
+                    <h2>Casino</h2>
+                    <p>
+                        (earn/lose 0-50 golds)
+                    </p>
+                    <form class='play_option' action='process_money' method='post'>
+                        <input type='hidden' name='building' value='casino' />
+                        <input id='casino_button' type='submit' value='Earn/lose Gold' onclick=getTime()/>
+                    </form>
+                </div>
+                <!-- End Casino div -->
+            </main>
+            <br />
+            <a href='/reset'>
+                <button>Reset</button>
+            </a>
             <h2>Activities</h2>
             <div class='log'>
                 <p>
-                    {{ session['farm_gold'] }}
-                </p>
+                  {% for row in session['outcome'] %}
+                    {% if 'Ouch' in row %}
+                    <p class='lose'>
+                    {% else %}
+                    <p class='gold'>
+                    {% endif %}
+                    {{ row }}
+                  {% endfor %}
+                    </p>
+
+                    </p>
             </div>
             <!-- End log div -->
 
         </div>
         <!-- End container div -->
+
+        <!-- <script>
+            $(document).ready(function(event) {
+                $('form').on('submit', function() {
+                    $('.log').append('<p>' + getTime() + '</p>')
+                    // event.preventDefault();
+                });
+
+                function getTime() {
+                    var now = new Date();
+                    var d = now.toDateString();
+                    var n = now.toLocaleTimeString();
+                    timeStamp = d + " " + n
+                    return timeStamp;
+                }
+            });
+        </script> -->
 
     </body>
 
