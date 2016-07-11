@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel='stylesheet' type='text/css' href={{ url_for('static', filename='../static/css/ninja.css' )}} </head>
+
+    <body>
+        <div class='container'>
+            <p>
+                Your Gold: {{session['gold_count']}}
+            </p>
+            <main>
+
+                <div id='farm' class='play_options'>
+                    <p>
+                        (eacrns 10-20 golds)
+                    </p>
+                    <form class='play_option' action='process_money' method='post'>
+                        <input type='hidden' name='farm' value='farm' />
+                        <input type='submit' value='submit' />
+                    </form>
+                </div>
+                <!-- End Farm div -->
+            </main>
+
+            <h2>Activities</h2>
+            <div class='log'>
+                <p>
+                    {{ session['farm_gold'] }}
+                </p>
+            </div>
+            <!-- End log div -->
+
+        </div>
+        <!-- End container div -->
+
+    </body>
+
+</html>
